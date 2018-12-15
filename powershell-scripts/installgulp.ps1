@@ -13,10 +13,8 @@ $vsc_url = "https://go.microsoft.com/fwlink/?LinkID=623230"
 
 
 # activate / desactivate any install
-$install_node = $TRUE
 $install_git = $TRUE
 $install_gulp = $TRUE
-$install_jspm = $TRUE
 $install_eslint = $TRUE
 
 write-host "`n----------------------------"
@@ -30,19 +28,6 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
    break
 }
 
-### nodejs version check
-
-if (Get-Command node -errorAction SilentlyContinue) {
-    $current_version = (node -v)
-}
- 
-if ($current_version) {
-    write-host "[NODE] nodejs $current_version already installed"
-    $confirmation = read-host "Are you sure you want to replace this version ? [y/N]"
-    if ($confirmation -ne "y") {
-        $install_node = $FALSE
-    }
-}
 
 write-host "`n"
 
@@ -87,53 +72,8 @@ if ($install_git) {
 }
 
 
-if ($install_node) {
-    
-    ### download nodejs msi file
-    # warning : if a node.msi file is already present in the current folder, this script will simply use it
-        
-    write-host "`n----------------------------"
-    write-host "  nodejs msi file retrieving  "
-    write-host "----------------------------`n"
 
-    $filename = "node.msi"
-    $node_msi = "$PSScriptRoot\$filename"
-    
-    $download_node = $TRUE
-
-    if (Test-Path $node_msi) {
-        $confirmation = read-host "Local $filename file detected. Do you want to use it ? [Y/n]"
-        if ($confirmation -eq "n") {
-            $download_node = $FALSE
-        }
-    }
-
-    if ($download_node) {
-        write-host "[NODE] downloading nodejs install"
-        write-host "url : $url"
-        $start_time = Get-Date
-        $wc = New-Object System.Net.WebClient
-        $wc.DownloadFile($url, $node_msi)
-        write-Output "$filename downloaded"
-        write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
-    } else {
-        write-host "using the existing node.msi file"
-    }
-
-    ### nodejs install
-
-    write-host "`n----------------------------"
-    write-host " nodejs installation  "
-    write-host "----------------------------`n"
-
-    write-host "[NODE] running $node_msi"
-    Start-Process $node_msi -Wait
-    
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
-    
-} else {
-    write-host "Proceeding with the previously installed nodejs version ..."
-}
+write-host "Proceeding with the previously installed nodejs version ..."
 
 ### npm packages install
 
@@ -253,16 +193,26 @@ if ($confirmation -eq "y") {
 write-host "Done installing gulp globally!"
 
 # Install gulp locally in working web directory
+$WEBSITEPATH = read-host "Please enter your website directory path:"
+cd $WEBSITEPATH
+
+Copy-Item -Path "$home\Documents\scriptbox\gulpfile.js" -Destination $WEBSITEPATH
+Copy-Item -Path "$home\Documents\scriptbox\package.json" -Destination $WEBSITEPATH
+
+
 
 # Remove any old versions of gulp in the directory and then clean the cache
 npm rm gulp --save-dev
-npm cache clean
 
 # Install the latest Gulp CLI tools globally
-npm install gulpjs/gulp-cli -g
+#npm install gulpjs/gulp-cli -g
 
 # Install Gulp 4 into your project from 4.0 GitHub branch as dev dependency
-npm install gulp@next --save-dev
+#npm install gulp@next --save-dev
+
+npm install gulp --save-dev
 gulp -v
 
+npm install
+npm install gulp-terser
 

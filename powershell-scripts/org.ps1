@@ -29,9 +29,9 @@ foreach ($item in Get-ChildItem | Where-Object Extension -In ".css") {
     Move-Item $item.FullName css
 }
 
-foreach ($item in Get-ChildItem | Where-Object Extension -In ".scss") {
-    if (!(Test-Path scss)) {
-        new-item -Name scss -ItemType directory
+foreach ($item in Get-ChildItem | Where-Object Extension -In ".sass") {
+    if (!(Test-Path sass)) {
+        new-item -Name sass -ItemType directory
     }
-    Move-Item $item.FullName scss
+    Move-Item $item.FullName sass
 }

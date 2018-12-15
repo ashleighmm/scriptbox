@@ -43,7 +43,8 @@ Write-Host "The directory was initialized and an initial commit was performed wi
 $GITREPO = Read-Host -Prompt " your remote Repository url: "
 git remote add origin https://github.com/$GITUSER/$GITREPO.git
 git push -u origin master
-git remote set-url origin git@github.com/$GITUSER/$GITREPO.git
+git remote set-url origin https://github.com/$GITUSER/$GITREPO.git
+git push -u origin master
 If( $? ){
   Write-Host "Unable to set remote repo"
 }

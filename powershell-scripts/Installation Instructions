@@ -1,9 +1,19 @@
 To install ScriptBox on a user's profile, you will need administrator access rights. You do not need administrator access rights to run the ScriptBox commands once you have installed it.
 
-1. Download ScriptBox.zip and extract it to Documents/ScriptBox/
-2. chmod 755 scriptbox.sh
-3. ./scriptbox.sh
-4. gi
+
+1. Download scriptbox.zip and extract it to Documents/ScriptBox/
+2. cd $home/Documents/scriptbox
+set-executionpolicy unrestricted
+
+If you don't have Nodejs installed:
+.\node-v10.14.2-x64.msi
+Follow the manual Node and npm installer GUI
+Close Powershell and then restart it
+
+
+Once Nodejs is installed (or has been previously installed)
+./scriptbox
+4. ginstall
 5. Enter website details when prompted
 6. cd your/website/working/directory/
 7. gulp
