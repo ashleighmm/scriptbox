@@ -1,4 +1,4 @@
-######To install ScriptBox on a user's profile, you will need administrator access rights. You do not need administrator access rights to run the ScriptBox commands once you have installed it.
+To install ScriptBox on a user's profile, you will need administrator access rights. You do not need administrator access rights to run the ScriptBox commands once you have installed it.
 
 1. Download ScriptBox.zip and extract it to Documents/ScriptBox/
 2. chmod 755 scriptbox.sh
