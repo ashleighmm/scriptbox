@@ -17,19 +17,14 @@ $install_git = $TRUE
 $install_gulp = $TRUE
 $install_eslint = $TRUE
 
-write-host "`n----------------------------"
 write-host " system requirements checking  "
-write-host "----------------------------`n"
-
 ### require administator rights
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-   write-Warning "This setup needs admin permissions. Please run this file as admin."     
-   break
+    write-Warning "This setup needs admin permissions. Please run this file as admin."     
+    break
 }
 
-
-write-host "`n"
 
 ### git install
 
@@ -40,7 +35,8 @@ if ($install_git) {
 
     if ($git_current_version) {
         write-host "[GIT] $git_current_version detected. Proceeding ..."
-    } else {
+    }
+    else {
         $git_exe = "$PSScriptRoot\git-installer.exe"
 
         write-host "No git version dectected"
@@ -71,15 +67,10 @@ if ($install_git) {
     }
 }
 
-
-
 write-host "Proceeding with the previously installed nodejs version ..."
 
 ### npm packages install
-
-write-host "`n----------------------------"
-write-host " npm packages installation  "
-write-host "----------------------------`n"
+write-host " npm package installation  "
 
 if (Get-Command gulp -errorAction SilentlyContinue) {
     $gulp_prev_v = (gulp -v)
@@ -140,10 +131,7 @@ if ($install_eslint) {
 }
 
 ### extras
-
-write-host "`n----------------------------"
-write-host " extra tools "
-write-host "----------------------------`n"
+write-host " Install VS Code "
 
 $confirmation = read-host "[VSC] Do you want to install VS Code ? [y/N]"
 if ($confirmation -eq "y") {
@@ -171,10 +159,7 @@ if ($confirmation -eq "y") {
 }
 
 ### clean
-
-write-host "`n----------------------------"
-write-host " system cleaning "
-write-host "----------------------------`n"
+write-host "Remove installation files"
 
 $confirmation = read-host "Delete install files ? [y/N]"
 if ($confirmation -eq "y") {
@@ -200,7 +185,6 @@ Copy-Item -Path "$home\Documents\scriptbox\gulpfile.js" -Destination $WEBSITEPAT
 Copy-Item -Path "$home\Documents\scriptbox\package.json" -Destination $WEBSITEPATH
 
 
-
 # Remove any old versions of gulp in the directory and then clean the cache
 npm rm gulp --save-dev
 
@@ -212,7 +196,6 @@ npm rm gulp --save-dev
 
 npm install gulp --save-dev
 gulp -v
-
+# install all of the packages stated in package.json file
 npm install
 npm install gulp-terser
-

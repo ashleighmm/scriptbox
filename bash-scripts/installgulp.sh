@@ -25,10 +25,9 @@ read WEBSITENAME;
 sudo sh -c "cd $WEBSITEPATH && touch gulpfile.js"
 sudo sh -c "cat gulpfile.js > $WEBSITEPATH/gulpfile.js"
 
-### Create a package.json file in the website directory and copy the contents from the package.json file in the ScriptBox installation folder.  When this has been installed, npm install uses it to check which packages and versions it needs to grab from the package manager library on the npm repository online and install them in the current website directory. 
+### Create a package.json file in the website directory and copy the contents from the package.json file in the ScriptBox installation folder. When this has been installed, npm install uses it to check which packages and versions it needs to grab from the package manager library on the npm repository online and install them in the current website directory.
 sudo sh -c "cd $WEBSITEPATH && touch package.json"
 sudo sh -c "cat package.json > $WEBSITEPATH/package.json"
-
 
 ### Installs necessary packages listed in the package.json file
 sudo sh -c "cd $WEBSITEPATH && npm install gulp"
@@ -41,9 +40,3 @@ sudo sh -c "cd $WEBSITEPATH && npm install gulp-sourcemaps"
 sudo sh -c "cd $WEBSITEPATH && npm install gulp-rename"
 sudo sh -c "cd $WEBSITEPATH && npm install gulp-terser"
 sudo sh -c "cd $WEBSITEPATH && npm install gulp-eslint"
-
-
-
-
-
-

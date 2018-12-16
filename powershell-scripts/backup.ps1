@@ -22,10 +22,7 @@
 # Backup the files using tar format and set the destination and backup filename
 
 
-
-# Create a zip file with the contents of C:\Stuff\
-#Compress-Archive -Path $BACKUPFOLDER -DestinationPath $BACKUPDEST/archive.zip
-
+# Create a zip file with the contents of your website file
 $backupfolder = Read-Host -Prompt "Which folder would you like to backup?"
 Write-Host "Backing up $BACKUPFOLDER to $BACKUPDEST/$archive_file"
 

@@ -11,7 +11,7 @@ const terser = require('gulp-terser');
 
 // Create basic Gulp tasks
 
-gulp.task('sass', function(done) {
+gulp.task('sass', function (done) {
   gulp
     .src('./sass/style.scss', { sourcemaps: true })
     .pipe(sourcemaps.init())
@@ -47,7 +47,7 @@ gulp.task('sass', function(done) {
   done();
 });
 
-gulp.task('lint', function() {
+gulp.task('lint', function () {
   return (
     gulp
       .src(['./js/*.js'])
@@ -61,7 +61,7 @@ gulp.task('lint', function() {
 
 gulp.task(
   'scripts',
-  gulp.series('lint', function() {
+  gulp.series('lint', function () {
     return gulp
       .src('./js/*.js')
       .pipe(terser())
@@ -76,7 +76,7 @@ gulp.task(
 
 // Set-up BrowserSync and watch
 
-gulp.task('browser-sync', function(done) {
+gulp.task('browser-sync', function (done) {
   browserSync.init({
     server: {
       baseDir: './'
@@ -90,7 +90,7 @@ gulp.task('browser-sync', function(done) {
   done();
 });
 
-gulp.task('watch', function(done) {
+gulp.task('watch', function (done) {
   gulp.watch('js/*.js', gulp.series('scripts'));
   gulp.watch('sass/*.scss', gulp.series('sass'));
   done();

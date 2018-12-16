@@ -51,5 +51,3 @@ sudo npm rm gulp-cli -g
 . ~/.profile
 . ~/.bashrc
 exit 1
-
-

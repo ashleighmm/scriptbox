@@ -1,10 +1,11 @@
 
-$FILE_TYPE="."
-$INITIAL_COMMIT_MESSAGE="Initial commit"
+$FILE_TYPE = "."
+$INITIAL_COMMIT_MESSAGE = "Initial commit"
 
 ## Git configuration
 Write-Host "###Configure Git.."
 
+# Prompt user to enter their Github details
 $GITUSER = Read-Host -Prompt "Enter the global username for Git:"
 git config --global --replace-all user.name $GITUSER
 git config --global user.name
@@ -17,23 +18,24 @@ Write-Host "Git has been configured!"
 git config --list
 
 #Check if there is an existing a .git directory
-If(Test-Path .git) {
- Write-Host "This directory has already been initialized with git."
-} Else { git init }
+If (Test-Path .git) {
+    Write-Host "This directory has already been initialized with git."
+}
+Else { git init }
 ##Check if git init was successful
-If( $? ) {
-  Write-Host "Unable to initialize your directory"
+If ( $? ) {
+    Write-Host "Unable to initialize your directory"
 }
 
 git add $FILE_TYPE
 ##Check if git add was successful
-If( $? ) {
-  Write-Host "Unable to stage files"
+If ( $? ) {
+    Write-Host "Unable to stage files"
 }
 git commit -m "$INITIAL_COMMIT_MESSAGE"
 ##Check if git commit was successful
-If( $? ) {
-  Write-Host "Unable to create the initial commit"
+If ( $? ) {
+    Write-Host "Unable to create the initial commit"
 }
 New-Item -ItemType file README.md
 New-Item -ItemType file .gitignore
@@ -45,6 +47,6 @@ git remote add origin https://github.com/$GITUSER/$GITREPO.git
 git push -u origin master
 git remote set-url origin https://github.com/$GITUSER/$GITREPO.git
 git push -u origin master
-If( $? ){
-  Write-Host "Unable to set remote repo"
+If ( $? ) {
+    Write-Host "Unable to set remote repo"
 }
