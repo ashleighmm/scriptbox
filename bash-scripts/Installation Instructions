@@ -3,7 +3,7 @@ To install ScriptBox on a user's profile, you will need administrator access rig
 1. Download ScriptBox.zip and extract it to Documents/ScriptBox/
 2. chmod 755 scriptbox.sh
 3. ./scriptbox.sh
-4. gi
+4. ginstall
 5. Enter website details when prompted
 6. cd your/website/working/directory/
 7. gulp
